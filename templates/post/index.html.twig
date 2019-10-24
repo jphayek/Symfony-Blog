@@ -1,39 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Amazing Blog{% endblock %}
+{% block title %}My Amazing Blog - Home{% endblock %}
 
 {% block body %}
     <h1>Posts</h1>
 
-
         {% for post in posts %}
         <article>
-
-            <tr>
-                <h2>
-                    {{ post.title }}<br>
-                    <span class="article-date"> Published {{ post.CreatedAt ? post.CreatedAt|date('Y-m-d H:i:s') : '' }}</span>
-                </h2>
-               
-                <div>{{ post.content |nl2br}}</div>
-                
-                <div>
-                    <a href="{{ path('post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-                    <br>
-
-                    {{include('post/_delete_form.html.twig')}}
-                    {{post.comments.count}} Comments
-                </div>
-            </tr>
-
-
+            <h2>
+                {{ post.title }}<br>
+                <span class="article-date">Published {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+            </h2>
+            
+            <div>{{ post.content|nl2br }}</div>
+            <div>
+                <a href="{{ path('post_show', {'id': post.id}) }}">show</a>
+                <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+                <br>
+                {{ post.comments.count }} Comments
+            </div>
         </article>
-          
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+            <h2>no records found</h2>
         {% endfor %}
 
     <a href="{{ path('post_new') }}">Create new</a>
