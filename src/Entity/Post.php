@@ -46,6 +46,10 @@ class Post
     }
 
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
 
     public function getId(): ?int
